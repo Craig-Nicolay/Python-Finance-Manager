@@ -9,11 +9,10 @@ Ergbnis sind CSV Dateien mit Salden und Umsätzen pro Gruppenname, diese können
 
 ## Disclaimer
 
-**Es handelt sich um ein reines Hobby-Projekte.**|
-**Es wird keine Garantie für Fehlerfreiheit, (umfangreichen) Support, Realisierung von individuellen Wünschen oder zeitnahe Unterstützung geben!**|
-**Die genannten Produkt- und Markennamen sind Eigentum der jeweilingen Inhaber**
+**Es handelt sich um ein reines Hobby-Projekte.**
+**Es wird keine Garantie für Fehlerfreiheit, Support oder zeitnahe Unterstützung gegeben!**
+**Die genannten Produkt- und Markennamen sind Eigentum der jeweilingen Inhaber.**
 
-<br>
 
 ## Anforderung
 
@@ -25,8 +24,8 @@ Zum Lesen der PDF Finanzreports wird die Python Bibliothek [pdfplumber](https://
 ## Installation
 
 1. Download [Python 3.11+](https://www.python.org/)
-2. Unter Windows: Kommandozeilenfenster öffnen („Windows-Taste“ + „R“ starten. Dort den Befehl „cmd.exe“ eingeben und mit „Enter“ bestätigen)
-   Alle weiteren Schritte sind im Kommandozeilenfenster auszuführen.
+2. Unter Windows: Kommandozeilenfenster öffnen („Windows-Taste“ + „R“ starten. Dort den Befehl „cmd.exe“ eingeben und mit „Enter“ bestätigen),
+   alle weiteren Schritte sind im Kommandozeilenfenster auszuführen.
 3. Python version prüfen mit dem Aufruf: python --version
 4. Python Aktualisierung mit dem Aufruf: pip install update
 5. pdfplumber installieren: pip install pdfplumber
@@ -39,16 +38,19 @@ Die Datei [com_fm.ini](com_fm.ini) enthält alle zur individuellen Anpassung not
 
 | Parameter | Beschreibung |
 |-------------------------------------------------------|------------------------------------------------------------------|
-| pfad : D:\\comdirect\\Kto1234567 | Pfad zum Ablageort der comdirect Finanzreports, "\\" als Verzeichnistrenner beachten! |
+| pfad : D:\\comdirect\\Kto1234567 | Pfad zum Ablageort der comdirect Finanzreports. |
 | jahr : 2022 | Auswertungsjahr |
-| Gruppenname :  Schlüsselwort1 , Schlüsselwort2, ... z.B.:<br>Online Ausgaben : paypal,amazon,internet,online | Unter dem Gruppenname werden alle Einnahmen und Ausgaben zusammengefasst 
+| Gruppenname : Schlüsselwort1,Schlüsselwort2,... z.B.:<br>Online Ausgaben : paypal,amazon,internet,online | Unter dem Gruppenname werden alle Einnahmen und Ausgaben zusammengefasst 
 deren Text eines der nachfolgenden Schlüsselwörter enthält. |
+
+com_fm.ini einthält bereits Beispiel Gruppennamen und Schlüsselwörter, die individuell erweitert oder angepasst werden können. Hierbei ist zu beachten: Die Trennung zwischen pfad, jahr und Gruppennamen ist " : " (ein Leerzeichen vor und nach dem Doppelpunkt). Die Schlüsselwörter (klein geschrieben) ohne Leerzeichen mit Komma getrennt.
+com_fm.ini wird in der Reihenfolge der Eintragung durchsucht. Beachte, dass sehr kurze Schlüsselwörte spätere längere Schlüsselwörter unterdrücken können. So verhindert das Schlüsselwort "markt" z.B. das Auffinden von "kaufmarkt".
 
 ## Aufbau der Finanzreports
 
-Die für Auswertung relevanten Zahlungsvorgänge beginnen auf Seite 2 des Finanzreports und startet mit dem Einlesen des Alten Saldos. Die weiteren Einnahmen und Ausgaben werden bis zum Erreichen des Neuen Saldos zeilenweise eingelesen. Hierbei werden die Buchungstext Zeilen berücksichtigt, z.B.<br>
-02.06.2022 Lastschrift/ STADTWERKE KD.-NR.345,00-ABSCHLAG0 -91,00<br>
-Der Text wird mit den in com_fm.ini hinterlegten Schlüsselwörtern verglichen und der Buchungsbetrag dem Gruppensaldo zugeordnet. Der Text wird beim Vergleich in Kleinbuchstaben umgewandelt, so dass Klein-/Grossschreibung keine Relevanz hat. Kann keine Zuordnung gefunden werden, so werden Einnahmen der Gruppe "Einnahmen div." und Ausgaben der Gruppe "Einnahmen div." zugeordnet. Zur Überprüfung und ggf. Ergänzung von Schlüsselwörtern in com_fm.ini werden alle Buchungen der Gruppen "Einnahmen div." und "Einnahmen div." ausgegeben. Enthält com_fm.ini keine Gruppennamen, so werden alle Einnahmen "Einnahmen div." und Ausgaben "Ausgaben div." zugeordnet.
+Die für die Auswertung relevanten Zahlungsvorgänge beginnen auf Seite 2 des Finanzreports und startet mit dem Einlesen des Alten Saldos. Die weiteren Einnahmen und Ausgaben werden bis zum Erreichen des Neuen Saldos zeilenweise eingelesen. Hierbei werden die Buchungstext Zeilen berücksichtigt, z.B.: 02.06.2022 Lastschrift/ STADTWERKE KD.-NR.345,00-ABSCHLAG0 -91,00<br>
+Der Text wird mit den in com_fm.ini hinterlegten Schlüsselwörtern verglichen und der Buchungsbetrag dem Gruppensaldo zugeordnet. Der Text wird beim Vergleich in Kleinbuchstaben umgewandelt, so dass Klein-/Grossschreibung keine Relevanz hat. Kann keine Zuordnung gefunden werden, so werden Einnahmen der Gruppe "Einnahmen div." und Ausgaben der Gruppe "Einnahmen div." zugeordnet.
+Zur Überprüfung und ggf. Ergänzung von Schlüsselwörtern in com_fm.ini werden alle Buchungen der Gruppen "Einnahmen div." und "Einnahmen div." am Ende ausgegeben. Enthält com_fm.ini keine Gruppennamen, so werden alle Einnahmen "Einnahmen div." und Ausgaben "Ausgaben div." zugeordnet.
 
 ## Aufruf
 
@@ -56,14 +58,17 @@ com_fm.py und com_fm.ini müssen sich im gleichen Verzeichnis befinden.<br>
 
 ```sh
 python com_fm.py
-
+```
+Laufzeit Ausgaben:
+```sh
 Finanzreport_Nr._01_per_03.02.2020.pdf saldo delta 0.0
 Finanzreport_Nr._02_per_02.03.2020.pdf saldo delta 0.0
 ...
 ```
+Während der Bearbeitung werden die eingelesenen Finanzreport Dateinamen angezeigt. Eine Saldenabweichung wird bei einem Auswertungsfehler als delta angezeigt.
 
 ## Ergebnisdateien
-Es werden zwei CSV Dateien erzeugt *jahr*_finmnanager.csv und *jahr*_finmnanager_bookings.csv. *jahr*_finmnanager.csv enthält die Gruppenübersicht und Gruppensalden mit den Spalten Jahr; Gruppenname; Anzahl Buchungen in der Gruppe; Saldo.
+Es werden zwei CSV Dateien erzeugt *jahr*_finmnanager.csv und *jahr*_finmnanager_bookings.csv. *jahr*_finmnanager.csv enthält die Gruppenübersicht und Gruppensalden mit den Spalten: Jahr; Gruppenname; Anzahl Buchungen in der Gruppe; Saldo.
 *jahr*_finmnanager_bookings.csv enthält Buchungsdatum; Gruppenname; Vorgang; Buchungstext; Betrag.
 
 ## Lizenz
