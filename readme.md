@@ -4,6 +4,10 @@
 
 [English version](README_EN.md)
 
+## Acknowledgments
+
+This project is a fork of the original [Python-Finanzmanager](https://github.com/t4ri/Python-Finanzmanager) by [t4ri](https://github.com/t4ri).
+
 **Python Finanzmanager zur Finanzübersicht von comdirect Finanzreports**<br>
 Mittels eines Python-Skripts werden die auf dem PC abgelegten PDF Finanzreports eines Jahres eingelesen und die enthaltenen Eingaben und Ausgaben über Schlüsselwörter Buchungsgruppen zugeordnet. 
 Ergbnis sind CSV Dateien mit Salden und Umsätzen pro Gruppenname, diese können dann z.B. in Excel weiter ausgewertet werden.
