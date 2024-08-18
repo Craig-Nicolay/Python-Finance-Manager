@@ -4,10 +4,6 @@
 
 [Deutsche Version](README.md)
 
-## Acknowledgments
-
-This project is a fork of the original [Python-Finanzmanager](https://github.com/t4ri/Python-Finanzmanager) by [t4ri](https://github.com/t4ri).
-
 **Python Finance Manager for Financial Overview from comdirect Financial Reports**<br>
 Using a Python script, the PDF financial reports stored on the PC for a given year are read, and the included income and expenses are assigned to booking groups based on keywords.
 The result is CSV files with balances and transactions per group name, which can then be further analyzed in Excel, for example.
@@ -84,3 +80,7 @@ Give Credit, NonCommercial, ShareAlike
 
 
 [comment]: # (:large_blue_circle:)
+
+## Acknowledgments
+
+This project is a fork of the original [Python-Finanzmanager](https://github.com/t4ri/Python-Finanzmanager) by [t4ri](https://github.com/t4ri).
