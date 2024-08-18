@@ -1,7 +1,8 @@
-
 # Python Finanzmanager 
 
 [![Support Python versions](https://img.shields.io/pypi/pyversions/pdfplumber.svg)](https://pypi.python.org/pypi/pdfplumber)
+
+[English version](README_EN.md)
 
 **Python Finanzmanager zur Finanzübersicht von comdirect Finanzreports**<br>
 Mittels eines Python-Skripts werden die auf dem PC abgelegten PDF Finanzreports eines Jahres eingelesen und die enthaltenen Eingaben und Ausgaben über Schlüsselwörter Buchungsgruppen zugeordnet. 
